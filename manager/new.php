@@ -33,7 +33,7 @@ if (isset($_POST['submit'])) {
     <link rel="canonical" href="https://www.zattv.com">
     <meta property="og:title" content="ZatTV - Your Ultimate TV Entertainment Hub">
     <meta property="og:description" content="ZatTV, Your Premier Destination for TV Enthusiasts! Dive into a world of captivating television with our blog. Explore show reviews, behind-the-scenes exclusives, breaking news, and binge-worthy recommendations. Immerse yourself in the ultimate hub for all things TV – ZatTV, where the best in television entertainment comes to life!">
-    <meta property="og:image" content="URL_TO_YOUR_BLOG_IMAGE">
+    <meta property="og:image" content="../assets/images/logo.jpeg">
     <meta property="og:url" content="https://www.zattv.com">
     <meta property="og:type" content="website">
 
@@ -41,7 +41,7 @@ if (isset($_POST['submit'])) {
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="ZatTV - Your Ultimate TV Entertainment Hub">
     <meta name="twitter:description" content="ZatTV, Your Premier Destination for TV Enthusiasts! Dive into a world of captivating television with our blog. Explore show reviews, behind-the-scenes exclusives, breaking news, and binge-worthy recommendations. Immerse yourself in the ultimate hub for all things TV – ZatTV, where the best in television entertainment comes to life!">
-    <meta name="twitter:image" content="URL_TO_YOUR_BLOG_IMAGE">
+    <meta name="twitter:image" content="../assets/images/logo.jpeg">
 
     <!-- Tailwind & Daisy Ui -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.6.1/dist/full.min.css" rel="stylesheet" type="text/css" />
@@ -52,6 +52,7 @@ if (isset($_POST['submit'])) {
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="shortcut icon" href="../assets/images/logo.jpeg" type="image/x-icon">
 
     <!-- Include stylesheet -->
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
