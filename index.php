@@ -178,7 +178,7 @@ if (isset($_POST['likepost'])) {
             </div>
 
             <!-- Advert link -->
-            <a href="" class="w-full md:w-max mt-10 md:mt-0 h-14 md:h-10 bg-[#141414] flex items-center px-3 py-2 gap-1 ring-1 ring-gray-800 rounded-lg justify-center md:justify-start">
+            <a href="https://worldbraintechnology.com" class="w-full md:w-max mt-10 md:mt-0 h-14 md:h-10 bg-[#141414] flex items-center px-3 py-2 gap-1 ring-1 ring-gray-800 rounded-lg justify-center md:justify-start">
                 <p class="text-xs font-bold text-gray-500">View All News</p>
                 <ion-icon class="-rotate-45 text-[#ffd119]" name="arrow-forward"></ion-icon>
             </a>
@@ -292,7 +292,7 @@ if (isset($_POST['likepost'])) {
             </div>
 
             <!-- Advert link -->
-            <a href="" class="w-full md:w-max mt-10 md:mt-0 h-14 md:h-10 bg-[#141414] flex items-center px-3 py-2 gap-1 ring-1 ring-gray-800 rounded-lg justify-center md:justify-start text-gray-500">
+            <a href="https://www.instagram.com/official_trapbite" class="w-full md:w-max mt-10 md:mt-0 h-14 md:h-10 bg-[#141414] flex items-center px-3 py-2 gap-1 ring-1 ring-gray-800 rounded-lg justify-center md:justify-start text-gray-500">
                 <p class="text-xs font-bold">Order Now</p>
                 <ion-icon class="-rotate-45 text-[#ffd119]" name="arrow-forward"></ion-icon>
             </a>
