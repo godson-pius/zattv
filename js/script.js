@@ -1,7 +1,8 @@
 let i = 0;
-let txt = "Today's Headline:";
+let txt = document.getElementById('headline').innerHTML || "Welcome to ZaTtv:";
 let speed = 60;
 
+document.getElementById("headline").innerHTML = ""
 const typeWriter = () => {
     if (i < txt.length) {
         document.getElementById("headline").innerHTML += txt.charAt(i);
