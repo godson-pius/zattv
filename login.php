@@ -62,6 +62,7 @@ if (isset($_POST['submit'])) {
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="assets/images/logo.jpeg" type="image/x-icon">
     <title>Zattv - Login</title>
 </head>
 
