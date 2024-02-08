@@ -3,9 +3,9 @@ require_once 'prepared/prepared.php';
 ACCESS_USING_SESSION('admin', 'login');
 
 if (isset($_POST['submit'])) {
-    $title = CHECK_INPUT(SANITIZE($_POST['title']));
+    $title = ALLOW_SAFE_SYMBOLS(CHECK_INPUT(SANITIZE($_POST['title'])));
     $category = CHECK_INPUT(SANITIZE($_POST['category']));
-    $content = CHECK_INPUT(SANITIZE($_POST['content']));
+    $content = ALLOW_SAFE_SYMBOLS(CHECK_INPUT(SANITIZE($_POST['content'])));
     $slug = str_replace(' ', '-', strtolower($title));
 
     $sql = "INSERT INTO posts (title, slug, category, content) VALUES ('$title', '$slug', '$category', '$content')";

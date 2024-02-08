@@ -12,9 +12,9 @@ if (isset($_GET['id'])) {
 }
 
 if (isset($_POST['submit'])) {
-    $title = CHECK_INPUT(SANITIZE($_POST['title']));
+    $title = ALLOW_SAFE_SYMBOLS(CHECK_INPUT(SANITIZE($_POST['title'])));
     $category = CHECK_INPUT(SANITIZE($_POST['category']));
-    $content = CHECK_INPUT(SANITIZE($_POST['content']));
+    $content = ALLOW_SAFE_SYMBOLS(CHECK_INPUT(SANITIZE($_POST['content'])));
     $slug = str_replace(' ', '-', strtolower($title));
 
     $sql = "UPDATE posts SET title = '$title', slug = '$slug',  category = '$category', content = '$content' WHERE id = '$id'";
