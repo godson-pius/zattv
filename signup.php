@@ -61,14 +61,14 @@ if (isset($_POST['submit'])) {
     <title>Zattv - Sign Up</title>
 </head>
 
-<body class="bg-[#141414]">
+<body class="bg-[#f2f2f2]">
 
-    <main class="w-full px-44 h-screen flex justify-center items-center">
+    <main class="w-full px-10 lg:px-44 h-screen flex justify-center items-center">
         <form action="" method="post" class="w-[40rem] bg-[#191919] p-10 shadow-lg rounded-lg">
-            <div class="flex items-center gap-4 mb-10">
+            <a href="./" class="flex items-center gap-4 mb-10">
                 <div class="logo w-20 h-20 flex overflow bg-[url('assets/images/logo.jpeg')] bg-cover bg-center rounded-full shadow-lg ring-1 ring-white"></div>
                 <h2 class="text-xl font-bold text-white mt-2 uppercase">User Sign Up</h2>
-            </div>
+            </a>
 
             <input type="text" name="username" required placeholder="Enter username" class="p-3 w-full rounded-lg text-white mb-4 bg-[#141414] ring-1 ring-gray-700">
             <select name="gender" id="gender" required class="p-3 w-full rounded-lg text-white mb-4 bg-[#141414] ring-1 ring-gray-700">

@@ -2,7 +2,6 @@
 require_once 'manager/prepared/prepared.php';
 
 $recentPost = EXECUTE_QUERY(SELECT_ALL_LIMIT("posts", 'id', 0, 1));
-$user_id = $_SESSION['user'];
 
 if (isset($_GET['post'])) {
     $slug = $_GET['post'];
@@ -17,37 +16,51 @@ if (isset($_GET['post'])) {
     }
 }
 
-// POST COMMENT
-if (isset($_POST['submit'])) {
-    $comment = CHECK_INPUT(SANITIZE($_POST['comment']));
+// LIKE POST
+if (isset($_POST['likepost'])) {
+    if ($user_id) {
+        $id = $_POST['postId'];
+        if (CHECK_MULTIPLE_DUPLICATE("likes", 'post_id', $id, 'user_id', $user_id) === true) {
+            echo "<script>alert('Cannot like post twice!')</script>";
+        } else {
+            $sql = "INSERT INTO likes (post_id, user_id) VALUES ($id, $user_id)";
+            $result = VALIDATE_QUERY($sql);
 
-    $sql = "INSERT INTO comments (post_id, user_id, comment) VALUES ($id, $user_id, '$comment')";
-    $result = VALIDATE_QUERY($sql);
-
-    if ($result === true) {
-        echo "<script>alert('Comment Added!')</script>";
-        $allComments = EXECUTE_QUERY(SELECT_WHERE("comments", "post_id", $id));
-        $numOfLikes = GET_TOTAL_WHERE("likes", 'post_id', $id);
-        $numOfComments = GET_TOTAL_WHERE("comments", 'post_id', $id);
+            if ($result === true) {
+                echo "<script>alert('Post liked!')</script>";
+                if ($_GET['category']) {
+                    $cat = $_GET['category'];
+                    $allPosts = EXECUTE_QUERY(SELECT_WHERE('posts', 'category', $cat));
+                } else {
+                    $allPosts = EXECUTE_QUERY(SELECT_ALL('posts', 'id'));
+                }
+                $recentPost = EXECUTE_QUERY(SELECT_ALL_LIMIT("posts", 'id', 0, 1));
+            } else {
+                echo "<script>alert('Failed to like post!')</script>";
+            }
+        }
     } else {
-        echo "<script>alert('Failed to add comment!')</script>";
+        REDIRECT('login');
     }
 }
 
-// LIKE POST
-if (isset($_POST['likepost'])) {
-    if (CHECK_MULTIPLE_DUPLICATE("likes", 'post_id', $id, 'user_id', $user_id) === true) {
-        echo "<script>alert('Cannot like post twice!')</script>";
-    } else {
-        $sql = "INSERT INTO likes (post_id, user_id) VALUES ($id, $user_id)";
+if ($_SESSION['user']) {
+    $user_id = $_SESSION['user'];
+
+    // POST COMMENT
+    if (isset($_POST['submit'])) {
+        $comment = CHECK_INPUT(SANITIZE($_POST['comment']));
+
+        $sql = "INSERT INTO comments (post_id, user_id, comment) VALUES ($id, $user_id, '$comment')";
         $result = VALIDATE_QUERY($sql);
 
         if ($result === true) {
+            echo "<script>alert('Comment Added!')</script>";
             $allComments = EXECUTE_QUERY(SELECT_WHERE("comments", "post_id", $id));
             $numOfLikes = GET_TOTAL_WHERE("likes", 'post_id', $id);
             $numOfComments = GET_TOTAL_WHERE("comments", 'post_id', $id);
         } else {
-            echo "<script>alert('Failed to like post!')</script>";
+            echo "<script>alert('Failed to add comment!')</script>";
         }
     }
 }
@@ -93,14 +106,14 @@ if (isset($_POST['likepost'])) {
     <title>Zattv - Read Post</title>
 </head>
 
-<body class="bg-[#141414]">
+<body class="bg-[#f2f2f2]">
     <main>
         <!-- HEADER SECTION -->
         <?php require_once 'incs/header.php'; ?>
 
         <!-- HERO SECTION -->
         <section class="w-full hero flex flex-col items-start py-16 md:py-44 px-10 lg:px-28 bg-[url('./assets/images/hero2.jpg')] bg-cover bg-center">
-            <h1 class="text-4xl lg:text-6xl text-white font-bold" data-aos="fade-right" id="headline"><?= $title; ?></h1>
+            <h1 class="text-4xl lg:text-6xl text-blue-700 font-extrabold" data-aos="fade-right" id="headline"><?= $title; ?></h1>
             <p class="text-gray-500 mt-3"><?= $content; ?></p>
         </section>
 
@@ -109,55 +122,56 @@ if (isset($_POST['likepost'])) {
 
         <!-- RECENT POSTS -->
         <section class="w-full flex flex-col">
-            <div class="w-full flex flex-col md:flex-row py-16 lg:py-32 px-10 lg:px-28 items-start gap-3 md:gap-12">
+            <div class="w-full flex flex-col md:flex-row py-16 lg:py-32 px-10 lg:px-28 items-start gap-3 md:gap-12 bg-gray-200">
                 <div class="w-96 h-72 flex overflow bg-[url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGNsaW1hdGV8ZW58MHx8MHx8fDA%3D')] bg-cover bg-center rounded-lg shadow-lg">
                 </div>
 
 
                 <div class="w-full content mt-6">
-                    <h1 class="text-2xl font-bold text-white"><?= $title; ?></h1>
-                    <p class="mt-5 text-gray-500"><?= $content; ?></p>
+                    <h1 class="text-2xl font-bold text-blue-700"><?= $title; ?></h1>
+                    <p class="mt-5 text-slate-900"><?= $content; ?></p>
 
                     <div class="details w-full flex mt-10 text-sm gap-10">
                         <div class="flex flex-col">
-                            <h4 class="text-gray-500">Category</h4>
-                            <p class="text-white font-bold"><?= $category; ?></p>
+                            <h4 class="text-blue-600">Category</h4>
+                            <p class="text-black font-bold"><?= $category; ?></p>
                         </div>
 
                         <div class="flex flex-col">
-                            <h4 class="text-gray-500">Publication Date</h4>
-                            <p class="text-white font-bold"><?= HUMAN_DATE($created_at); ?></p>
+                            <h4 class="text-blue-600">Publication Date</h4>
+                            <p class="text-black font-bold"><?= HUMAN_DATE($created_at); ?></p>
+                        </div>
+                        <div class="flex flex-col">
+                            <h4 class="text-blue-600">Author</h4>
+                            <p class="text-black font-bold">ZatTv Admin</p>
                         </div>
 
-                        <div class="flex flex-col">
-                            <h4 class="text-gray-500">Author</h4>
-                            <p class="text-white font-bold">ZatTv Admin</p>
-                        </div>
                     </div>
 
                     <!-- Like post & Read more -->
                     <div class="flex items-center justify-between mt-7">
                         <div class="like flex gap-2 items-center">
                             <form action="" method="post">
-                                <button type="submit" name="likepost" class="love flex items-center bg-[#191919] px-3 py-2 rounded-full gap-1">
+                                <input type="hidden" name="postId" value="<?= $id; ?>">
+                                <button type="submit" name="likepost" class="love flex items-center bg-blue-700 px-3 py-2 rounded-full gap-1">
                                     <ion-icon name="<?php if (CHECK_MULTIPLE_DUPLICATE("likes", 'post_id', $id, 'user_id', $user_id) === true) {
                                                         echo 'heart';
                                                     } else {
                                                         echo 'heart-outline';
                                                     } ?>" class="<?php if (CHECK_MULTIPLE_DUPLICATE("likes", 'post_id', $id, 'user_id', $user_id) === true) : echo 'text-red-500';
-                                                                                                                                                                                                        endif; ?>"></ion-icon>
-                                    <p class="text-xs font-bold text-gray-500"><?= $numOfLikes; ?></p>
+                                                                    endif; ?>"></ion-icon>
+                                    <p class="text-xs font-bold text-white"><?= $numOfLikes; ?></p>
                                 </button>
                             </form>
 
-                            <div class="love flex items-center bg-[#191919] px-3 py-2 rounded-full gap-1">
+                            <div class="love flex items-center bg-blue-700 px-3 py-2 rounded-full gap-1">
                                 <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
-                                <p class="text-xs font-bold text-gray-500"><?= $numOfComments; ?></p>
+                                <p class="text-xs font-bold text-white"><?= $numOfComments; ?></p>
                             </div>
                         </div>
 
                         <!-- read more -->
-                        <a href="#" class="love flex bg-[#191919] text-gray-500 btn btn-sm ring-1 ring-gray-800 text-xs rounded-lg">
+                        <a href="#" class="love flex bg-[#191919] text-white btn btn-sm ring-1 ring-gray-800 text-xs rounded-lg hover:bg-blue-500 hover:text-white hover:ring-white">
                             Share Post
                         </a>
                     </div>
@@ -168,7 +182,7 @@ if (isset($_POST['likepost'])) {
 
             <!-- Comments -->
             <div class="w-full px-10 md:px-28 py-10 comments flex flex-col">
-                <h2 class="text-3xl font-bold mb-4">Comments</h2>
+                <h2 class="text-3xl font-bold mb-4 text-blue-500">Comments</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2">
                     <?php
                     if ($allComments) {
@@ -181,10 +195,10 @@ if (isset($_POST['likepost'])) {
                                     </div>
                                 </div>
                                 <div class="chat-header">
-                                    <time class="text-xs opacity-50 text-gray-500"><?= HUMAN_DATE_TIME($created_at); ?></time>
+                                    <time class="text-xs opacity-50 text-black font-bold"><?= HUMAN_DATE_TIME($created_at); ?></time>
                                 </div>
-                                <div class="chat-bubble w-full"><?= $comment; ?></div>
-                                <div class="chat-footer opacity-50">
+                                <div class="chat-bubble w-full bg-blue-600 text-white font-bold"><?= $comment; ?></div>
+                                <div class="chat-footer opacity-50 text-black">
                                     User
                                 </div>
                             </div>
@@ -192,8 +206,8 @@ if (isset($_POST['likepost'])) {
                     } else { ?>
                         <div class="w-full comments flex flex-col">
                             <p class="divider"></p>
-                            <h2 class="text-xl font-bold text-red-300">No comments yet!</h2>
-                            <p class="text-sm text-yellow-300 animate-pulse">Be the first to comment</p>
+                            <h2 class="text-xl font-bold text-red-500">No comments yet!</h2>
+                            <p class="text-sm text-slate-900 animate-pulse">Be the first to comment</p>
                         </div>
                     <?php } ?>
                 </div>
@@ -203,8 +217,8 @@ if (isset($_POST['likepost'])) {
             if ($_SESSION['user']) { ?>
                 <div class="w-full px-10 md:px-28 comments flex flex-col">
                     <form action="" method="post" class="w-full py-5">
-                        <textarea required class="w-full p-3 rounded-lg h-44 bg-transparent ring-1 ring-gray-500" name="comment" id="comment" placeholder="Write comment..."></textarea>
-                        <button type="submit" name="submit" class="btn btn-neutral mt-3">Post comment</button>
+                        <textarea required class="w-full p-3 rounded-lg h-44 bg-transparent ring-1 ring-gray-500 text-black" name="comment" id="comment" placeholder="Write comment..."></textarea>
+                        <button type="submit" name="submit" class="btn btn-info bg-blue-700 text-white mt-3">Post comment</button>
                     </form>
                 </div>
             <?php } else { ?>
@@ -217,21 +231,21 @@ if (isset($_POST['likepost'])) {
         <!-- ADVERT -->
         <section class="w-full flex flex-col md:flex-row py-16 lg:py-32 px-10 lg:px-28 items-center bg-[#191919] justify-between">
             <div class="flex flex-col md:flex-row items-center gap-5">
-                <div class="optional__image w-44 h-44 rounded-t-full md:rounded-l-full bg-[#141414] bg-[url('/assets/images/worldbrain.png')] bg-cover bg-center shadow-lg">
+                <div class="optional__image w-44 h-44 rounded-t-full md:rounded-l-full bg-[#141414] bg-[url('assets/images/worldbrain.png')] bg-cover bg-center shadow-lg">
                 </div>
 
                 <div class="flex flex-col text-center md:text-left items-center md:items-start md:items-left">
-                    <div class="bg-[#141414] p-2 px-5 text-white rounded w-max">
+                    <div class="bg-blue-700 p-2 px-5 text-blue-300 rounded w-max">
                         <p>Learn any programming language</p>
                     </div>
-                    <h1 class="text-4xl mt-3 text-white font-bold">World Brain Technology Limited.</h1>
+                    <h1 class="text-4xl mt-3 text-[#f2f2f2] font-bold">World Brain Technology Limited.</h1>
                 </div>
             </div>
 
             <!-- Advert link -->
-            <a href="" class="w-full md:w-max mt-10 md:mt-0 h-14 md:h-10 bg-[#141414] flex items-center px-3 py-2 gap-1 ring-1 ring-gray-800 rounded-lg justify-center md:justify-start">
-                <p class="text-xs font-bold text-gray-500">View All News</p>
-                <ion-icon class="-rotate-45 text-[#ffd119]" name="arrow-forward"></ion-icon>
+            <a href="https://worldbraintechnology.com" class="w-full md:w-max mt-10 md:mt-0 h-14 md:h-10 bg-blue-700 flex items-center px-3 py-2 gap-1 ring-1 ring-gray-800 rounded-lg justify-center md:justify-start">
+                <p class="text-xs font-bold text-[#f2f2f2]">View All News</p>
+                <ion-icon class="-rotate-45 text-[#f2f2f2]" name="arrow-forward"></ion-icon>
             </a>
         </section>
 
@@ -239,23 +253,23 @@ if (isset($_POST['likepost'])) {
         <p class="divider"></p>
 
         <!-- ADVERT -->
-        <section class="w-full flex flex-col md:flex-row py-16 lg:py-32 px-10 lg:px-28 items-center bg-[#191919] justify-between">
+        <section class="w-full flex flex-col md:flex-row py-16 lg:py-32 px-10 lg:px-28 items-center bg-blue-700 justify-between">
             <div class="flex flex-col md:flex-row items-center gap-5">
-                <div class="optional__image w-44 h-44 rounded-t-full md:rounded-l-full bg-[#141414] bg-[url('/assets/images/trapbite.png')] bg-cover bg-center shadow-lg" data-aos="flip-right" data-aos-duration="1500">
+                <div class="optional__image w-44 h-44 rounded-t-full md:rounded-l-full bg-[#f2f2f2] bg-[url('assets/images/trapbite.png')] bg-cover bg-center shadow-lg" data-aos="flip-right" data-aos-duration="1500">
                 </div>
 
                 <div class="flex flex-col text-center md:text-left items-center md:items-start md:items-left">
-                    <div class="bg-[#141414] p-2 px-5 text-white rounded w-max">
+                    <div class="bg-[#141414] p-2 px-5 text-blue-100 rounded w-max">
                         <p>Have you had a teste of trapbite's shawarma?</p>
                     </div>
-                    <h1 class="text-4xl mt-3 text-white font-bold">TrapBite Got Ya!</h1>
+                    <h1 class="text-4xl mt-3 text-[#f2f2f2] font-bold">TrapBite Got Ya!</h1>
                 </div>
             </div>
 
             <!-- Advert link -->
-            <a href="" class="w-full md:w-max mt-10 md:mt-0 h-14 md:h-10 bg-[#141414] flex items-center px-3 py-2 gap-1 ring-1 ring-gray-800 rounded-lg justify-center md:justify-start text-gray-500">
-                <p class="text-xs font-bold">Order Now</p>
-                <ion-icon class="-rotate-45 text-[#ffd119]" name="arrow-forward"></ion-icon>
+            <a href="https://www.instagram.com/official_trapbite" class="w-full md:w-max mt-10 md:mt-0 h-14 md:h-10 bg-blue-700 flex items-center px-3 py-2 gap-1 ring-1 ring-gray-800 rounded-lg justify-center md:justify-start text-slate-900 hover:scale-105 duration-500 hover:shadow-lg hover:ring-1 hover:ring-white">
+                <p class="text-xs font-bold text-[#f2f2f2]">Order Now</p>
+                <ion-icon class="-rotate-45 text-[#f2f2f2]" name="arrow-forward"></ion-icon>
             </a>
         </section>
 
