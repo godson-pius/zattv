@@ -171,7 +171,7 @@ if ($_SESSION['user']) {
                         </div>
 
                         <!-- read more -->
-                        <a href="#" class="love flex bg-[#191919] text-white btn btn-sm ring-1 ring-gray-800 text-xs rounded-lg hover:bg-blue-500 hover:text-white hover:ring-white">
+                        <a href="#" class="love flex bg-blue-700 text-white btn btn-sm  text-xs rounded-lg hover:bg-blue-500 hover:text-white hover:ring-white">
                             Share Post
                         </a>
                     </div>
@@ -223,7 +223,7 @@ if ($_SESSION['user']) {
                 </div>
             <?php } else { ?>
                 <div class="w-96 px-10 md:px-28 py-10 comments flex flex-col">
-                    <a href="login?origin=r&post=<?= $slug; ?>" class="link btn bg-slate-900">Login to comment</a>
+                    <a href="login?origin=r&post=<?= $slug; ?>" class="link text-white btn bg-blue-900">Login to comment</a>
                 </div>
             <?php } ?>
         </section>
@@ -277,10 +277,10 @@ if ($_SESSION['user']) {
         <p class="divider px-10 md:px-28"></p>
 
         <!-- FOOTER -->
-        <footer class="flex flex-col md:flex-row gap-2 md:gap-0 items-center justify-between px-10 lg:px-28 pb-5 text-sm">
+        <footer class="flex bg-slate-800 flex-col md:flex-row gap-2 md:gap-0 items-center justify-between px-10 lg:px-28 py-5 text-sm">
             <div class="flex gap-1 divide-x divide-gray-800">
-                <a href="" class="p-1 text-gray-500">Terms & Conditions</a>
-                <a href="" class="p-1 text-gray-500">Privacy Policy</a>
+                <a href="" class="p-1 text-slate-100">Terms & Conditions</a>
+                <a href="" class="p-1 text-slate-100">Privacy Policy</a>
             </div>
 
             <!-- social media -->
@@ -291,7 +291,7 @@ if ($_SESSION['user']) {
                 <ion-icon class="text-white" size="small" name="logo-facebook"></ion-icon>
             </div>
 
-            <p class=" text-gray-500">© 2024 ZatTv. All rights reserved.</p>
+            <p class=" text-slate-100">© 2024 ZatTv. All rights reserved.</p>
         </footer>
 
 
