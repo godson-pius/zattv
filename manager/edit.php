@@ -16,11 +16,14 @@ if (isset($_POST['submit'])) {
     $category = CHECK_INPUT(SANITIZE($_POST['category']));
     $content = ALLOW_SAFE_SYMBOLS(CHECK_INPUT(SANITIZE($_POST['content'])));
     $slug = str_replace(' ', '-', strtolower($title));
+    $filename = $_FILES['image']['name'];
+    $tmpfilename = $_FILES['image']['tmp_name'];
 
-    $sql = "UPDATE posts SET title = '$title', slug = '$slug',  category = '$category', content = '$content' WHERE id = '$id'";
+    $sql = "UPDATE posts SET title = '$title', slug = '$slug',  category = '$category', content = '$content', image = '$filename' WHERE id = '$id'";
     $result = VALIDATE_QUERY($sql);
 
     if ($result === true) {
+        move_uploaded_file($tmpfilename, "../assets/images/blog/$filename");
         echo "<script>alert('Post Updated!')</script>";
     } else {
         echo "<script>alert('Failed to add post!')</script>";
@@ -76,7 +79,7 @@ if (isset($_POST['submit'])) {
 
         <h2 class="ml-10 md:ml-28 py-10 text-4xl font-bold text-white">Edit Post</h2>
         <!-- POST FORM -->
-        <form action="" class="w-full px-10 md:px-28 bg-[#191919] p-10" method="post">
+        <form action="" class="w-full px-10 md:px-28 bg-[#191919] p-10" method="post" enctype="multipart/form-data">
             <input type="text" name="title" placeholder="Enter title" class="p-3 w-full rounded-lg text-white mb-6 bg-[#141414] border-2" value="<?= $title; ?>">
 
             <select name="category" class="p-3 w-full rounded-lg text-white bg-[#141414] border-2 mb-1">
@@ -92,6 +95,9 @@ if (isset($_POST['submit'])) {
                 <option value="News">News</option>
             </select>
             <p class="text-gray-500 mb-6 text-sm">Selected category: <?= $category; ?></p>
+
+            <input type="file" required name="image" placeholder="Enter title" class="p-3 w-full rounded-lg text-white mb-1 bg-[#141414] border-2">
+            <p class="text-gray-500 mb-6 text-sm">Selected image: <?= $image; ?></p>
 
             <textarea name="content" class="p-3 w-full rounded-lg text-white mb-6 bg-[#141414] border-2 h-80" placeholder="Some content"><?= $content; ?></textarea>
 

@@ -7,11 +7,14 @@ if (isset($_POST['submit'])) {
     $category = CHECK_INPUT(SANITIZE($_POST['category']));
     $content = ALLOW_SAFE_SYMBOLS(CHECK_INPUT(SANITIZE($_POST['content'])));
     $slug = str_replace(' ', '-', strtolower($title));
+    $filename = $_FILES['image']['name'];
+    $tmpfilename = $_FILES['image']['tmp_name'];
 
-    $sql = "INSERT INTO posts (title, slug, category, content) VALUES ('$title', '$slug', '$category', '$content')";
+    $sql = "INSERT INTO posts (title, slug, category, content, image) VALUES ('$title', '$slug', '$category', '$content', '$filename')";
     $result = VALIDATE_QUERY($sql);
 
     if ($result === true) {
+        move_uploaded_file($tmpfilename, "../assets/images/blog/$filename");
         echo "<script>alert('Post Added!')</script>";
     } else {
         echo "<script>alert('Failed to add post!')</script>";
@@ -67,7 +70,7 @@ if (isset($_POST['submit'])) {
 
         <h2 class="ml-10 md:ml-28 py-10 text-4xl font-bold text-white">Add New Post</h2>
         <!-- POST FORM -->
-        <form action="" class="w-full px-10 md:px-28 bg-[#191919] p-10" method="post">
+        <form action="" class="w-full px-10 md:px-28 bg-[#191919] p-10" method="post" enctype="multipart/form-data">
             <input type="text" required name="title" placeholder="Enter title" class="p-3 w-full rounded-lg text-white mb-6 bg-[#141414] border-2">
 
             <select name="category" required class="p-3 w-full rounded-lg text-white mb-6 bg-[#141414] border-2">
@@ -85,9 +88,11 @@ if (isset($_POST['submit'])) {
                 <option value="Health">Health</option>
             </select>
 
-            <textarea required name="content" class="p-3 w-full rounded-lg text-white mb-6 bg-[#141414] border-2 h-80" placeholder="Some content"></textarea>
+            <input type="file" required name="image" placeholder="Enter title" class="p-3 w-full rounded-lg text-white mb-6 bg-[#141414] border-2">
 
-            <button class="btn btn-neutral mt-3" name="submit" type="submit">Create post</button>
+            <textarea required name="content" class="p-3 w-full rounded-lg text-white mb-4 bg-[#141414] border-2 h-72" placeholder="Some content"></textarea>
+
+            <button class="btn btn-neutral" name="submit" type="submit">Create post</button>
         </form>
 
     </main>

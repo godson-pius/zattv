@@ -105,7 +105,7 @@ if (isset($_POST['deletepost'])) {
                         <!-- Single Post -->
                         <div class="post flex flex-col md:flex-row items-start gap-6 md:gap-16 mt-4 md:mt-10 pt-6 md:pt-10" data-aos="zoom-in-up" data-aos-duration="1500" data-aos-once="false">
                             <div class="author w-96 flex gap-3 items-center">
-                                <div class="image w-12 h-12 bg-cover bg-center shadow-lg rounded-full bg-[url('../assets/images/logo.jpeg')]">
+                                <div class="image w-12 h-12 bg-cover bg-center shadow-lg rounded-full bg-[url('../assets/images/blog/<?= $image; ?>')]">
                                 </div>
 
                                 <div>

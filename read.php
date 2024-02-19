@@ -123,7 +123,7 @@ if ($_SESSION['user']) {
         <!-- RECENT POSTS -->
         <section class="w-full flex flex-col">
             <div class="w-full flex flex-col md:flex-row py-16 lg:py-32 px-10 lg:px-28 items-start gap-3 md:gap-12 bg-gray-200">
-                <div class="w-96 h-72 flex overflow bg-[url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGNsaW1hdGV8ZW58MHx8MHx8fDA%3D')] bg-cover bg-center rounded-lg shadow-lg">
+                <div class="w-96 h-72 flex overflow bg-[url('assets/images/blog/<?= $image; ?>')] bg-cover bg-center rounded-lg shadow-lg">
                 </div>
 
 

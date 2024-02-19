@@ -101,15 +101,16 @@ if (isset($_POST['likepost'])) {
 
         <!-- RECENT POSTS -->
         <section class="w-full flex flex-col md:flex-row py-16 lg:py-32 px-10 lg:px-28 items-start gap-3 md:gap-12 bg-gray-200">
-            <div class="w-96 h-72 flex overflow bg-[url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGNsaW1hdGV8ZW58MHx8MHx8fDA%3D')] bg-cover bg-center rounded-lg shadow-lg">
-            </div>
-
             <?php
             if ($recentPost) {
                 foreach ($recentPost as $post) {
                     extract($post);
                     $numOfLikes = GET_TOTAL_WHERE("likes", 'post_id', $id);
                     $numOfComments = GET_TOTAL_WHERE("comments", 'post_id', $id); ?>
+
+                    <div class="w-96 h-72 flex overflow bg-[url('assets/images/blog/<?= $image; ?>')] bg-cover bg-center rounded-lg shadow-lg">
+                    </div>
+
                     <div class="w-full content mt-6">
                         <h1 class="text-2xl font-bold text-blue-700"><?= $title; ?></h1>
                         <p class="mt-5 text-slate-900"><?= $content; ?></p>
@@ -191,17 +192,28 @@ if (isset($_POST['likepost'])) {
         <section class="w-full flex-col md:flex-row py-10 px-10 lg:px-28" id="posts">
             <!-- Categories -->
             <div class="links w-full flex items-center gap-4 overflow-x-auto no-scrollbar">
-                <a href="index" class="btn px-16 outline-none border-none hover:bg-blue-500 hover:text-white text-white text-sm <?php if (!$cat) : echo 'bg-blue-700'; endif; ?>">All</a>
-                <a href="index?category=Technology" class="btn px-16 border-none hover:bg-blue-500 hover:text-white text-[#f2f2f2] text-sm <?php if ($cat === 'Technology') : echo 'bg-blue-700'; endif; ?>">Technology</a>
-                <a href="index?category=Education" class="btn px-16 border-none hover:bg-blue-500 hover:text-white text-[#f2f2f2] text-sm <?php if ($cat === 'Education') : echo 'bg-blue-700'; endif; ?>">Education</a>
-                <a href="index?category=Lifestyle" class="btn px-16 border-none hover:bg-blue-500 hover:text-white text-[#f2f2f2] text-sm <?php if ($cat === 'Lifestyle') : echo 'bg-blue-700'; endif; ?>">Lifestyle</a>
-                <a href="index?category=Politics" class="btn px-16 border-none hover:bg-blue-500 hover:text-white text-[#f2f2f2] text-sm <?php if ($cat === 'Politics') : echo 'bg-blue-700'; endif; ?>">Politics</a>
-                <a href="index?category=Fashion" class="btn px-16 border-none hover:bg-blue-500 hover:text-white text-[#f2f2f2] text-sm <?php if ($cat === 'Fashion') : echo 'bg-blue-700'; endif; ?>">Fashion</a>
-                <a href="index?category=Inspiration" class="btn px-16 border-none hover:bg-blue-500 hover:text-white text-[#f2f2f2] text-sm <?php if ($cat === 'Inspiration') : echo 'bg-blue-700'; endif; ?>">Inspiration</a>
-                <a href="index?category=Entertainment" class="btn px-16 border-none hover:bg-blue-500 hover:text-white text-[#f2f2f2] text-sm <?php if ($cat === 'Entertainment') : echo 'bg-blue-700'; endif; ?>">Entertainment</a>
-                <a href="index?category=Religion" class="btn px-16 border-none hover:bg-blue-500 hover:text-white text-[#f2f2f2] text-sm <?php if ($cat === 'Religion') : echo 'bg-blue-700'; endif; ?>">Religion</a>
-                <a href="index?category=Health" class="btn px-16 border-none hover:bg-blue-500 hover:text-white text-[#f2f2f2] text-sm <?php if ($cat === 'Health') : echo 'bg-blue-700'; endif; ?>">Health</a>
-                <a href="index?category=Sports" class="btn px-16 border-none hover:bg-blue-500 hover:text-white text-[#f2f2f2] text-sm <?php if ($cat === 'Sports') : echo 'bg-blue-700'; endif; ?>">Sports</a>
+                <a href="index" class="btn px-16 outline-none border-none hover:bg-blue-500 hover:text-white text-white text-sm <?php if (!$cat) : echo 'bg-blue-700';
+                                                                                                                                endif; ?>">All</a>
+                <a href="index?category=Technology" class="btn px-16 border-none hover:bg-blue-500 hover:text-white text-[#f2f2f2] text-sm <?php if ($cat === 'Technology') : echo 'bg-blue-700';
+                                                                                                                                            endif; ?>">Technology</a>
+                <a href="index?category=Education" class="btn px-16 border-none hover:bg-blue-500 hover:text-white text-[#f2f2f2] text-sm <?php if ($cat === 'Education') : echo 'bg-blue-700';
+                                                                                                                                            endif; ?>">Education</a>
+                <a href="index?category=Lifestyle" class="btn px-16 border-none hover:bg-blue-500 hover:text-white text-[#f2f2f2] text-sm <?php if ($cat === 'Lifestyle') : echo 'bg-blue-700';
+                                                                                                                                            endif; ?>">Lifestyle</a>
+                <a href="index?category=Politics" class="btn px-16 border-none hover:bg-blue-500 hover:text-white text-[#f2f2f2] text-sm <?php if ($cat === 'Politics') : echo 'bg-blue-700';
+                                                                                                                                            endif; ?>">Politics</a>
+                <a href="index?category=Fashion" class="btn px-16 border-none hover:bg-blue-500 hover:text-white text-[#f2f2f2] text-sm <?php if ($cat === 'Fashion') : echo 'bg-blue-700';
+                                                                                                                                        endif; ?>">Fashion</a>
+                <a href="index?category=Inspiration" class="btn px-16 border-none hover:bg-blue-500 hover:text-white text-[#f2f2f2] text-sm <?php if ($cat === 'Inspiration') : echo 'bg-blue-700';
+                                                                                                                                            endif; ?>">Inspiration</a>
+                <a href="index?category=Entertainment" class="btn px-16 border-none hover:bg-blue-500 hover:text-white text-[#f2f2f2] text-sm <?php if ($cat === 'Entertainment') : echo 'bg-blue-700';
+                                                                                                                                                endif; ?>">Entertainment</a>
+                <a href="index?category=Religion" class="btn px-16 border-none hover:bg-blue-500 hover:text-white text-[#f2f2f2] text-sm <?php if ($cat === 'Religion') : echo 'bg-blue-700';
+                                                                                                                                            endif; ?>">Religion</a>
+                <a href="index?category=Health" class="btn px-16 border-none hover:bg-blue-500 hover:text-white text-[#f2f2f2] text-sm <?php if ($cat === 'Health') : echo 'bg-blue-700';
+                                                                                                                                        endif; ?>">Health</a>
+                <a href="index?category=Sports" class="btn px-16 border-none hover:bg-blue-500 hover:text-white text-[#f2f2f2] text-sm <?php if ($cat === 'Sports') : echo 'bg-blue-700';
+                                                                                                                                        endif; ?>">Sports</a>
             </div>
 
             <!-- DIVIDER -->
@@ -221,7 +233,7 @@ if (isset($_POST['likepost'])) {
                         <!-- Single Post -->
                         <div class="post flex flex-col md:flex-row items-start gap-6 md:gap-16 mt-4 md:mt-10 pt-6 md:pt-10" data-aos="zoom-in-up" data-aos-duration="1500" data-aos-once="false">
                             <div class="author w-96 flex gap-3 items-center">
-                                <div class="image w-12 h-12 bg-cover bg-center shadow-lg rounded-full bg-[url('assets/images/logo.jpeg')]">
+                                <div class="image w-12 h-12 bg-cover bg-center shadow-lg rounded-full bg-[url('assets/images/blog/<?= $image; ?>')]">
                                 </div>
 
                                 <div>

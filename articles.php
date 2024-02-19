@@ -82,16 +82,16 @@ if (isset($_POST['likepost'])) {
     <title>Zattv</title>
 </head>
 
-<body class="bg-[#141414]">
+<body class="bg-[#f2f2f2]">
     <main>
         <!-- HEADER SECTION -->
         <?php require_once 'incs/header.php'; ?>
 
         <!-- HERO SECTION -->
         <section class="w-full hero flex flex-col items-start py-16 md:py-44 px-10 lg:px-28 bg-[url('./assets/images/hero2.jpg')] bg-cover bg-center">
-            <h1 class="text-4xl lg:text-6xl text-white font-bold" data-aos="fade-right" id="headline">ZatTv Articles</h1>
+            <h1 class="text-4xl lg:text-6xl text-blue-700 font-extrabold" data-aos="fade-right" id="headline">ZatTv Articles</h1>
             <h3 class="text-gray-500 text-xl mt-4 mb-1 font-bold">Stay Informed</h3>
-            <p class="text-gray-500">
+            <p class="text-black">
 
                 Welcome to Zattv, your ultimate destination for exploring the intersection of art, technology, and culture. Here, we delve into the latest trends, innovations, and inspirations shaping our ever-evolving world. Whether you're an art enthusiast, a tech aficionado, or simply curious about the cutting edge, Zattv offers a diverse range of content to ignite your imagination and spark meaningful conversations. From in-depth interviews with groundbreaking artists and technologists to thought-provoking analysis of emerging trends, Zattv is your go-to platform for staying ahead of the curve. Join us on this exciting journey as we uncover the possibilities of creativity and innovation in the digital age. Welcome to Zattv—where imagination knows no bounds.</p>
         </section>
@@ -127,17 +127,17 @@ if (isset($_POST['likepost'])) {
         <section class="w-full flex-col md:flex-row py-10 px-10 lg:px-28" id="posts">
             <!-- Categories -->
             <div class="links w-full flex items-center gap-4 overflow-x-auto no-scrollbar">
-            <a href="articles" class="btn px-16 bg-[#141414] ring-1 ring-gray-800 text-sm <?php if (!$cat) : echo 'bg-yellow-500 text-white'; endif; ?>">All</a>
-                <a href="articles?category=Technology" class="btn bg-[#141414] px-16 ring-1 ring-gray-800 text-gray-500 text-sm <?php if ($cat === 'Technology') : echo 'bg-yellow-500 text-white'; endif; ?>">Technology</a>
-                <a href="articles?category=Education" class="btn bg-[#141414] px-16 ring-1 ring-gray-800 text-gray-500 text-sm <?php if ($cat === 'Education') : echo 'bg-yellow-500 text-white'; endif; ?>">Education</a>
-                <a href="articles?category=Lifestyle" class="btn bg-[#141414] px-16 ring-1 ring-gray-800 text-gray-500 text-sm <?php if ($cat === 'Lifestyle') : echo 'bg-yellow-500 text-white'; endif; ?>">Lifestyle</a>
-                <a href="articles?category=Politics" class="btn bg-[#141414] px-16 ring-1 ring-gray-800 text-gray-500 text-sm <?php if ($cat === 'Politics') : echo 'bg-yellow-500 text-white'; endif; ?>">Politics</a>
-                <a href="articles?category=Fashion" class="btn bg-[#141414] px-16 ring-1 ring-gray-800 text-gray-500 text-sm <?php if ($cat === 'Fashion') : echo 'bg-yellow-500 text-white'; endif; ?>">Fashion</a>
-                <a href="articles?category=Inspiration" class="btn bg-[#141414] px-16 ring-1 ring-gray-800 text-gray-500 text-sm <?php if ($cat === 'Inspiration') : echo 'bg-yellow-500 text-white'; endif; ?>">Inspiration</a>
-                <a href="articles?category=Entertainment" class="btn bg-[#141414] px-16 ring-1 ring-gray-800 text-gray-500 text-sm <?php if ($cat === 'Entertainment') : echo 'bg-yellow-500 text-white'; endif; ?>">Entertainment</a>
-                <a href="articles?category=Religion" class="btn bg-[#141414] px-16 ring-1 ring-gray-800 text-gray-500 text-sm <?php if ($cat === 'Religion') : echo 'bg-yellow-500 text-white'; endif; ?>">Religion</a>
-                <a href="articles?category=Health" class="btn bg-[#141414] px-16 ring-1 ring-gray-800 text-gray-500 text-sm <?php if ($cat === 'Health') : echo 'bg-yellow-500 text-white'; endif; ?>">Health</a>
-                <a href="articles?category=Sports" class="btn bg-[#141414] px-16 ring-1 ring-gray-800 text-gray-500 text-sm <?php if ($cat === 'Sports') : echo 'bg-yellow-500 text-white'; endif; ?>">Sports</a>
+                <a href="articles" class="btn px-16 outline-none border-none hover:bg-blue-500 hover:text-white text-white text-sm <?php if (!$cat) : echo 'bg-blue-700'; endif; ?>">All</a>
+                <a href="articles?category=Technology" class="btn px-16 border-none hover:bg-blue-500 hover:text-white text-[#f2f2f2] text-sm <?php if ($cat === 'Technology') : echo 'bg-blue-700'; endif; ?>">Technology</a>
+                <a href="articles?category=Education" class="btn px-16 border-none hover:bg-blue-500 hover:text-white text-[#f2f2f2] text-sm <?php if ($cat === 'Education') : echo 'bg-blue-700'; endif; ?>">Education</a>
+                <a href="articles?category=Lifestyle" class="btn px-16 border-none hover:bg-blue-500 hover:text-white text-[#f2f2f2] text-sm <?php if ($cat === 'Lifestyle') : echo 'bg-blue-700'; endif; ?>">Lifestyle</a>
+                <a href="articles?category=Politics" class="btn px-16 border-none hover:bg-blue-500 hover:text-white text-[#f2f2f2] text-sm <?php if ($cat === 'Politics') : echo 'bg-blue-700'; endif; ?>">Politics</a>
+                <a href="articles?category=Fashion" class="btn px-16 border-none hover:bg-blue-500 hover:text-white text-[#f2f2f2] text-sm <?php if ($cat === 'Fashion') : echo 'bg-blue-700'; endif; ?>">Fashion</a>
+                <a href="articles?category=Inspiration" class="btn px-16 border-none hover:bg-blue-500 hover:text-white text-[#f2f2f2] text-sm <?php if ($cat === 'Inspiration') : echo 'bg-blue-700'; endif; ?>">Inspiration</a>
+                <a href="articles?category=Entertainment" class="btn px-16 border-none hover:bg-blue-500 hover:text-white text-[#f2f2f2] text-sm <?php if ($cat === 'Entertainment') : echo 'bg-blue-700'; endif; ?>">Entertainment</a>
+                <a href="articles?category=Religion" class="btn px-16 border-none hover:bg-blue-500 hover:text-white text-[#f2f2f2] text-sm <?php if ($cat === 'Religion') : echo 'bg-blue-700'; endif; ?>">Religion</a>
+                <a href="articles?category=Health" class="btn px-16 border-none hover:bg-blue-500 hover:text-white text-[#f2f2f2] text-sm <?php if ($cat === 'Health') : echo 'bg-blue-700'; endif; ?>">Health</a>
+                <a href="articles?category=Sports" class="btn px-16 border-none hover:bg-blue-500 hover:text-white text-[#f2f2f2] text-sm <?php if ($cat === 'Sports') : echo 'bg-blue-700'; endif; ?>">Sports</a>
             </div>
 
             <!-- DIVIDER -->
@@ -157,51 +157,51 @@ if (isset($_POST['likepost'])) {
                         <!-- Single Post -->
                         <div class="post flex flex-col md:flex-row items-start gap-6 md:gap-16 mt-4 md:mt-10 pt-6 md:pt-10" data-aos="zoom-in-up" data-aos-duration="1500" data-aos-once="false">
                             <div class="author w-96 flex gap-3 items-center">
-                                <div class="image w-12 h-12 bg-cover bg-center shadow-lg rounded-full bg-[url('assets/images/logo.jpeg')]">
+                                <div class="image w-12 h-12 bg-cover bg-center shadow-lg rounded-full bg-[url('assets/images/blog/<?= $image; ?>')]">
                                 </div>
 
                                 <div>
-                                    <h1 class="font-bold text-white text-sm">Zat Admin</h1>
-                                    <p class="text-xs text-gray-500"><?= $category; ?></p>
+                                    <h1 class="font-bold text-black text-sm">Zat Admin</h1>
+                                    <p class="text-xs text-slate-900"><?= $category; ?></p>
                                 </div>
                             </div>
 
                             <article class="w-full">
-                                <p class="text-sm font-bold text-gray-500"><?= HUMAN_DATE($created_at); ?></p>
-                                <h1 class="text-white font-bold text-lg mt-5"><?= $title; ?></h1>
-                                <p class="text-gray-500"><?= $content; ?></p>
+                                <p class="text-sm font-bold text-slate-900"><?= HUMAN_DATE($created_at); ?></p>
+                                <h1 class="text-black font-bold text-lg mt-5 text-blue-700"><?= $title; ?></h1>
+                                <p class="text-slate-900"><?= $content; ?></p>
 
                                 <!-- Like post & Read more -->
                                 <div class="flex items-center justify-between mt-7">
                                     <div class="like flex gap-2 items-center">
                                         <form action="" method="post">
                                             <input type="hidden" name="postId" value="<?= $id; ?>">
-                                            <button type="submit" name="likepost" class="love flex items-center bg-[#191919] px-3 py-2 rounded-full gap-1">
+                                            <button type="submit" name="likepost" class="love flex items-center bg-blue-700 px-3 py-2 rounded-full gap-1">
                                                 <ion-icon name="<?php if (CHECK_MULTIPLE_DUPLICATE("likes", 'post_id', $id, 'user_id', $user_id) === true) {
                                                                     echo 'heart';
                                                                 } else {
                                                                     echo 'heart-outline';
                                                                 } ?>" class="<?php if (CHECK_MULTIPLE_DUPLICATE("likes", 'post_id', $id, 'user_id', $user_id) === true) : echo 'text-red-500';
                                                                                 endif; ?>"></ion-icon>
-                                                <p class="text-xs font-bold text-gray-500"><?= $numOfLikes; ?></p>
+                                                <p class="text-xs font-bold text-white"><?= $numOfLikes; ?></p>
                                             </button>
                                         </form>
 
-                                        <a href="read?post=<?= $slug; ?>" class="love flex items-center bg-[#191919] px-3 py-2 rounded-full gap-1">
+                                        <a href="read?post=<?= $slug; ?>" class="love flex items-center bg-blue-700 px-3 py-2 rounded-full gap-1">
                                             <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
-                                            <p class="text-xs font-bold text-gray-500"><?= $numOfComments; ?></p>
+                                            <p class="text-xs font-bold text-white"><?= $numOfComments; ?></p>
                                         </a>
 
-                                        <div class="love flex items-center bg-[#191919] px-3 py-2 rounded-full gap-1">
+                                        <div class="love flex items-center bg-blue-700 px-3 py-2 rounded-full gap-1">
                                             <ion-icon name="share-social-outline"></ion-icon>
-                                            <p class="text-xs font-bold text-gray-500">14k</p>
+                                            <p class="text-xs font-bold text-white">14k</p>
                                         </div>
                                     </div>
 
                                     <!-- read more -->
-                                    <a href="read?post=<?= $slug; ?>" class="love flex bg-[#191919] btn btn-sm ring-1 ring-gray-800 text-xs rounded-lg text-gray-500">
+                                    <a href="read?post=<?= $slug; ?>" class="love flex bg-[#191919] btn btn-sm ring-1 ring-gray-800 text-xs rounded-lg text-slate-900 bg-white hover:bg-blue-700 hover:text-white">
                                         Read More
-                                        <ion-icon class="-rotate-45 text-[#ffd119]" name="arrow-forward"></ion-icon>
+                                        <ion-icon class="-rotate-45 text-blue-100" name="arrow-forward"></ion-icon>
                                     </a>
                                 </div>
                             </article>
